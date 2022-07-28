@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  name String
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  participante Participante [] @relation("user")
+  funcao  Funcao? @relation(fields: [userId], references: [id])
+  userId String 
+  Contacto Contacto[]
+  perfil  Perfil             @default(USER)
+  perfilId String
+
+@@map("users")
+}
+model Reuniao{
+  id String @id @default(uuid())
+  title     String 
+  duration Int
+  release_date DateTime 
+  tempo_inicio DateTime 
+   tempo_fim  DateTime
+  @@map("reuniao")
+  participante Participante [] @relation("reuniao")
+  estado_reuniao Estado_reuniao? @relation(fields: [estadoId], references: [id])
+  estadoId String
+  prioridade_reuniao Prioridade_reuniao? @relation(fields: [prioridadeId], references: [id])
+  prioridadeId String
+}
+model Participante{
+  user User @relation("user", fields:[userId],references: [id])
+  userId String
+  reuniao Reuniao @relation("reuniao", fields:[reuniaoId],references: [id])
+  reuniaoId String
+  
+   @@id([userId,reuniaoId])
+   @@map("participante")
+}
+
+model Sala2 {
+  id  String   @id @default(uuid())
+  edificio2Id Int?
+  piso String
+  nome String
+  Edificio2  Edificio2? @relation(fields: [salaId], references: [id])
+  salaId String
+
+@@map("sala2")
+
+}
+
+model Edificio2 {
+  id    String    @id @default(uuid())
+  salas2 Sala2[]
+  nome String
+  
+  @@map("edificio")
+}
+
+//Relacao dos Usuarios
+
+model Funcao {
+id   String    @id @default(uuid())
+nome String
+user User[]
+Departamento  Departamento? @relation(fields: [departamentoId], references: [id])
+departamentoId String
+ @@map("funcao")
+}
+model Departamento{
+  id   String    @id @default(uuid())
+  nome String
+  funcao Funcao[]
+
+  @@map("departamento")
+}
+
+model Contacto{
+id   String    @id @default(uuid())
+numero String
+@@map("contacto")
+user  User? @relation(fields: [contactoId], references: [id])
+contactoId String
+}
+
+
+enum Perfil {
+  USER
+  ADMIN
+}
+
+/*model Perfil{
+ id   String    @id @default(uuid())
+  descricao String
+ user User[]
+}*/
+
+//Relacao Reuniao 
+
+model Estado_reuniao{
+  id String  @id @default(uuid())
+  descricao String
+  Reuniao Reuniao[]
+
+  @@map("estado_reuniao")
+
+}
+model Prioridade_reuniao{
+  id String  @id @default(uuid())
+  descricao String
+  Reuniao Reuniao[]
+
+  @@map("prioridade_reuniao")
+
+}
+
+
+

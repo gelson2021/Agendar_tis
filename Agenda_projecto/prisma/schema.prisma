@@ -102,12 +102,6 @@ enum Perfil {
   ADMIN
 }
 
-/*model Perfil{
- id   String    @id @default(uuid())
-  descricao String
- user User[]
-}*/
-
 //Relacao Reuniao 
 
 model Estado_reuniao{

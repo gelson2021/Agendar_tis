@@ -102,6 +102,11 @@ enum Perfil {
   ADMIN
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 //Relacao Reuniao 
 
 model Estado_reuniao{

@@ -1,9 +1,12 @@
 {
-  "name": "Agenda_projecto",
+  "name": "agenda_projecto",
   "version": "1.0.0",
   "description": "projecto de agendamento a rodar",
   "main": "index.js",
-  "repository": "https://github.com/gelson2021/Agendar_tis",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gelson2021/Agendar_tis.git"
+  },
   "author": "Francemy/Diana",
   "license": "MIT",
   "private": null,
@@ -17,5 +20,15 @@
   },
   "devDependencies": {
     "tslib": "^2.4.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/gelson2021/Agendar_tis/issues"
+  },
+  "homepage": "https://github.com/gelson2021/Agendar_tis#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tistech.co.ao"
+  ]
 }
